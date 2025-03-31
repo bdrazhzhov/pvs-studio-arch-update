@@ -10,13 +10,13 @@ source=("https://files.pvs-studio.com/pvs-studio-${pkgver}-${arch}.tgz")
 sha256sums=('<%= result[:hash] %>')
 
 build() {
-cd "$srcdir"
-tar -xvf "pvs-studio-${pkgver}-${arch}.tgz"
+    cd "$srcdir"
+    tar -xvf "pvs-studio-${pkgver}-${arch}.tgz"
 }
 
 package() {
-cd "$srcdir/pvs-studio-${pkgver}-${arch}"
+    cd "$srcdir/pvs-studio-${pkgver}-${arch}"
 
-install -dm755 "$pkgdir/usr/bin"
-install -m755 -s ./bin/* "$pkgdir/usr/bin/"
+    install -dm755 "$pkgdir/usr/bin"
+    install -m755 ./bin/* "$pkgdir/usr/bin/"
 }

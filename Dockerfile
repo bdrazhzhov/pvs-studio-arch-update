@@ -36,4 +36,6 @@ COPY docker-entrypoint.sh ./
 VOLUME ["/tmp/output"]
 VOLUME ["/tmp/repo"]
 
+ENV CARCH=x86_64
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
