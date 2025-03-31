@@ -1,5 +1,4 @@
 FROM docker.io/library/alpine AS base
-FROM crystallang/crystal:1.15.1-alpine AS crystal-base
 
 FROM base AS build-pacman
 RUN apk add --no-cache build-base git meson cmake bash libarchive-dev gcompat curl-dev
@@ -10,7 +9,9 @@ RUN meson setup build --prefix=/ --buildtype=plain -Di18n=false
 RUN meson compile -C build
 RUN meson install -C build --destdir /tmp/pacman-install
 
-FROM crystal-base AS build-app
+FROM base AS build-app
+
+RUN apk add --no-cache crystal shards openssl-dev make yaml-dev
 
 WORKDIR /app
 COPY shard.lock shard.yml ./
