@@ -3,7 +3,7 @@ set -euo pipefail
 
 cd /tmp/output
 
-repo_dir = /tmp/repo/
+repo_dir="/tmp/repo/"
 
 output=$(pvs-studio-arch-update)
 if [ -n "$output" ]; then
