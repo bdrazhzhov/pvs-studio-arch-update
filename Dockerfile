@@ -21,9 +21,11 @@ RUN shards install --production
 RUN shards build --release --no-debug && strip bin/pvs-studio-arch-update
 
 FROM base
-RUN apk add --no-cache bash coreutils fakeroot file gpg ncurses xz curl libarchive-tools libarchive binutils pcre2 gc libevent
 COPY --from=build-pacman /tmp/pacman-install /
 COPY --from=build-app /app/bin/pvs-studio-arch-update /bin
+
+RUN apk add --no-cache bash coreutils fakeroot file gpg ncurses xz curl \
+    libarchive-tools libarchive binutils pcre2 gc libevent zstd
 
 RUN addgroup --system --gid 1000 builder && \
     adduser builder --uid 1000 -G builder --disabled-password --shell /bin/sh
@@ -37,5 +39,7 @@ VOLUME ["/tmp/output"]
 VOLUME ["/tmp/repo"]
 
 ENV CARCH=x86_64
+ENV PACKAGER="Boris Drazhzhov <bdrazhzhov@gmail.com>"
+ENV PKGEXT='.pkg.tar.zst'
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
