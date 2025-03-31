@@ -27,9 +27,13 @@ COPY --from=build-app /app/bin/pvs-studio-arch-update /bin
 
 RUN addgroup --system --gid 1000 builder && \
     adduser builder --uid 1000 -G builder --disabled-password --shell /bin/sh
+RUN chmod 777 /var/lib/pacman
 
 USER 1000:1000
 
-VOLUME ["/tmp/output"]
+COPY docker-entrypoint.sh ./
 
-CMD ["pvs-studio-arch-update"]
+VOLUME ["/tmp/output"]
+VOLUME ["/tmp/repo"]
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
