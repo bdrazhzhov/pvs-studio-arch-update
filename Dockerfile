@@ -21,7 +21,7 @@ RUN shards install --production
 RUN shards build --release --no-debug && strip bin/pvs-studio-arch-update
 
 FROM base
-RUN apk add --no-cache bash coreutils fakeroot file gpg ncurses xz curl libarchive-tools libarchive binutils pcre2 gc
+RUN apk add --no-cache bash coreutils fakeroot file gpg ncurses xz curl libarchive-tools libarchive binutils pcre2 gc libevent
 COPY --from=build-pacman /tmp/pacman-install /
 COPY --from=build-app /app/bin/pvs-studio-arch-update /bin
 
