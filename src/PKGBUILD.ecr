@@ -1,0 +1,22 @@
+# Maintainer: Boris Drazhzhov <boris@local>
+pkgname=pvs-studio-local
+pkgver=<%= result[:version] %>
+pkgrel=1
+pkgdesc="PVS Studio (local version)"
+arch=('x86_64')
+url="https://pvs-studio.ru/"
+license=('BSD')
+source=("https://files.pvs-studio.com/pvs-studio-${pkgver}-${arch}.tgz")
+sha256sums=('<%= result[:hash] %>')
+
+build() {
+cd "$srcdir"
+tar -xvf "pvs-studio-${pkgver}-${arch}.tgz"
+}
+
+package() {
+cd "$srcdir/pvs-studio-${pkgver}-${arch}"
+
+install -dm755 "$pkgdir/usr/bin"
+install -m755 -s ./bin/* "$pkgdir/usr/bin/"
+}

@@ -1,0 +1,19 @@
+name: pvs-studio-arch-update
+version: 0.1.0
+
+authors:
+  - Boris Drazhzhov <bdrazhzhov@gmail.com>
+
+targets:
+  pvs-studio-arch-update:
+    main: src/main.cr
+
+dependencies:
+  myhtml:
+    github: kostya/myhtml
+
+development_dependencies:
+  ameba:
+    github: crystal-ameba/ameba
+
+license: BSD
