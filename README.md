@@ -1,29 +1,32 @@
 # PVS-Studio Arch Update
 
-This repository contains scripts and configurations for updating
-the PVS-Studio analyzer's architecture-specific files.
+Это репозиторий содержит конфигурацию docker-образа для создания и
+обновления пакета PVS-Studio для Arch Linux x86_64.
+Этот образ помогает поддерживать этот пакет в актуальном состоянии.
 
-## Purpose
+## Использование
 
-The PVS-Studio static analyzer supports various architectures.
-This repository helps to keep the architecture-specific files up-to-date.
+1.  Склонируйте репозиторий.
+2.  Передите в диркторию `pvs-studio-arch-update`.
+3.  Выполните `docker buildx build -t pvs-studio-arch-update .`
 
-## Structure
+Проверить работу образа можно выполнив команду:
 
--   `scripts/`: Contains scripts for updating the architecture files.
--   `configs/`: Contains configuration files.
--   `README.md`: This file.
+```bash
+docker run --rm -it -v <local-artefacts-dir>:/tmp/output -v <local-repository-dir>:/tmp/repo pvs-studio-arch-update:latest
+```
 
-## Usage
+тут:
 
-1.  Clone the repository.
-2.  Run the scripts in the `scripts/` directory.
-3.  Check the results.
+- `<local-artefacts-dir>` — это директория, в которой будет собираться пакет.
+    В ней так же будет хранится информация, необходимая для проверки обновлений,
+    и все собранные ранее пакеты
+- `<local-repository-dir>` — путь к директории, в которой наодится локальный
+    пользовательский репозиторий Arch Linux. Предполагается, что БД пакетов
+    имеет название `custom`.
 
-## Contributing
+Результирующий пакет будет иметь имя `pvs-studio-local`.
 
-Contributions are welcome. Please submit a pull request.
+## Лицензия
 
-## License
-
-BSD
+[BSD](LICENCE)
